@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header Component</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <div class="header-container">
+            <div class="contact-section">
+                <div class="mail-icon">
+                    <img src="images/Mail.svg" alt="Mail">
+                </div>
+                <div class="contact-text">Contact</div>
+            </div>
+            
+            <div class="right-section">
+                <div class="search-container">
+                    <div class="loading-icon">
+                        <img src="images/Loading.svg" alt="Loading">
+                    </div>
+                    <input type="text" class="search-input" placeholder="Search an article, an event, an e-learning, a product...">
+                    <div class="search-icon">
+                        <img src="images/Search.svg" alt="Search">
+                    </div>
+                    <div class="close-icon">
+                        <img src="images/Close.svg" alt="Close">
+                    </div>
+                </div>
+                
+                <div class="dropdown-section">
+                    <div class="user-info">
+                        <div class="user-name">John Doe</div>
+                        <div class="dropdown-icon">
+                            <img src="images/Dropdown.svg" alt="Dropdown">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Panel -->
+    <div class="settings-panel">
+        <h3>Component Settings</h3>
+        
+        <div class="setting-group">
+            <label for="contact-label">Contact Label:</label>
+            <input type="text" id="contact-label" value="Contact" placeholder="Enter label">
+        </div>
+        
+        <div class="setting-group">
+            <label for="user-name">User Name:</label>
+            <input type="text" id="user-name" value="John Doe" placeholder="Enter name">
+        </div>
+        
+        <div class="setting-group">
+            <label for="resolution-switch">Smallest desktop resolution (993px):</label>
+            <div class="switch-container">
+                <input type="checkbox" id="resolution-switch" class="switch-input">
+                <label for="resolution-switch" class="switch-label">
+                    <span class="switch-button"></span>
+                </label>
+                <span class="switch-text">OFF</span>
+            </div>
+        </div>
+        
+        <button id="update-component" class="update-btn">Update Component</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
