@@ -284,10 +284,16 @@ body.mobile-mode .header {
     line-height: 20px;
     color: #6e6e74;
     background: transparent;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .search-input::placeholder {
     color: #6e6e74;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .search-input:focus {
@@ -611,6 +617,46 @@ body.mobile-mode .mobile-search-bar.active {
     align-items: center;
     padding: 8px 16px;
     background-color: white;
+    min-width: 0;
+    transition: padding 0.3s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mobile-search-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 1px solid transparent;
+    border-radius: 40px;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+.mobile-search-container:focus-within {
+    padding: 4px;
+}
+
+.mobile-search-container:focus-within::after {
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    border-color: #bdbddf;
+    opacity: 1;
+}
+
+.mobile-search-container:focus-within .mobile-search-input {
+    padding: 8px 16px;
+    margin: 0;
+}
+
+.mobile-search-container:focus-within .mobile-search-submit,
+.mobile-search-container:focus-within .mobile-search-close {
+    margin-right: 16px;
+    z-index: 1;
 }
 
 .mobile-search-input {
@@ -623,6 +669,7 @@ body.mobile-mode .mobile-search-bar.active {
     line-height: 24px;
     color: #1c1a50;
     background: transparent;
+    min-width: 0;
 }
 
 .mobile-search-input::placeholder {
@@ -640,6 +687,7 @@ body.mobile-mode .mobile-search-bar.active {
     align-items: center;
     justify-content: center;
     margin-left: 8px;
+    transition: margin 0.3s ease;
 }
 
 .mobile-search-submit img,

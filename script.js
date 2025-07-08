@@ -6,6 +6,32 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchContainer = document.querySelector('.search-container');
     const closeIcon = document.querySelector('.close-icon');
     
+    // Fonction pour tronquer le placeholder
+    function truncatePlaceholder(input, originalText) {
+        if (!input || !input.offsetWidth) return;
+        
+        const containerWidth = input.offsetWidth;
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        const computedStyle = window.getComputedStyle(input);
+        context.font = `${computedStyle.fontSize} ${computedStyle.fontFamily}`;
+        
+        let text = originalText;
+        let textWidth = context.measureText(text).width;
+        
+        if (textWidth > containerWidth - 40) { // -40 pour laisser de l'espace pour l'icône
+            while (textWidth > containerWidth - 70 && text.length > 0) { // -70 pour les "..." + icône
+                text = text.slice(0, -1);
+                textWidth = context.measureText(text + '...').width;
+            }
+            if (text.length > 0) {
+                text += '...';
+            }
+        }
+        
+        input.placeholder = text;
+    }
+    
     
     // Contact section
     const contactSection = document.querySelector('.contact-section');
@@ -47,6 +73,40 @@ document.addEventListener('DOMContentLoaded', function() {
     const mobileSearchContainer = document.querySelector('.mobile-search-container');
     const mobileSearchSubmit = document.querySelector('.mobile-search-submit');
     const mobileSearchClose = document.querySelector('.mobile-search-close');
+    
+    // Appliquer la troncature aux placeholders
+    const originalDesktopPlaceholder = "Search an article, an e-learning, a product...";
+    const originalMobilePlaceholder = "Search an article, an e-learning, a product...";
+    
+    // Fonction pour initialiser les placeholders tronqués
+    function initPlaceholders() {
+        if (searchInput && searchInput.offsetWidth > 0) {
+            truncatePlaceholder(searchInput, originalDesktopPlaceholder);
+        }
+        if (mobileSearchInput && mobileSearchInput.offsetWidth > 0) {
+            truncatePlaceholder(mobileSearchInput, originalMobilePlaceholder);
+        }
+    }
+    
+    // Initialiser les placeholders avec plusieurs tentatives
+    function tryInitPlaceholders() {
+        initPlaceholders();
+        // Si les éléments ne sont pas encore rendus, réessayer
+        if (searchInput && searchInput.offsetWidth === 0) {
+            setTimeout(tryInitPlaceholders, 50);
+        }
+        if (mobileSearchInput && mobileSearchInput.offsetWidth === 0) {
+            setTimeout(tryInitPlaceholders, 50);
+        }
+    }
+    
+    // Initialiser les placeholders - DÉSACTIVÉ
+    // setTimeout(tryInitPlaceholders, 100);
+    
+    // Réappliquer lors du redimensionnement - DÉSACTIVÉ
+    // window.addEventListener('resize', () => {
+    //     setTimeout(initPlaceholders, 100);
+    // });
 
     if (mobileSearchIcon) {
         mobileSearchIcon.addEventListener('click', function() {
