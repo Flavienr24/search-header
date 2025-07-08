@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Search functionality
     const searchInput = document.querySelector('.search-input');
     const searchIcon = document.querySelector('.search-icon');
+    const mobileSearchIcon = document.querySelector('.mobile-search-icon');
     const searchContainer = document.querySelector('.search-container');
     const closeIcon = document.querySelector('.close-icon');
     
@@ -35,9 +36,78 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Search functionality
+    // Desktop search functionality
     searchIcon.addEventListener('click', function() {
         performSearch();
+    });
+
+    // Mobile search functionality
+    const mobileSearchBar = document.querySelector('.mobile-search-bar');
+    const mobileSearchInput = document.querySelector('.mobile-search-input');
+    const mobileSearchContainer = document.querySelector('.mobile-search-container');
+    const mobileSearchSubmit = document.querySelector('.mobile-search-submit');
+    const mobileSearchClose = document.querySelector('.mobile-search-close');
+
+    if (mobileSearchIcon) {
+        mobileSearchIcon.addEventListener('click', function() {
+            mobileSearchBar.classList.add('active');
+            mobileSearchInput.focus();
+        });
+    }
+
+    // Mobile search input handling
+    if (mobileSearchInput) {
+        mobileSearchInput.addEventListener('input', function() {
+            if (this.value.trim().length > 0) {
+                mobileSearchContainer.classList.add('has-content');
+            } else {
+                mobileSearchContainer.classList.remove('has-content');
+            }
+        });
+
+        mobileSearchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performMobileSearch();
+            }
+        });
+    }
+
+    // Mobile search submit
+    if (mobileSearchSubmit) {
+        mobileSearchSubmit.addEventListener('click', function() {
+            performMobileSearch();
+        });
+    }
+
+    // Mobile search close
+    if (mobileSearchClose) {
+        mobileSearchClose.addEventListener('click', function() {
+            mobileSearchInput.value = '';
+            mobileSearchContainer.classList.remove('has-content');
+            mobileSearchInput.focus(); // Garde le focus sur le champ
+        });
+    }
+
+    function performMobileSearch() {
+        const searchTerm = mobileSearchInput.value.trim();
+        if (searchTerm) {
+            console.log('Mobile searching for:', searchTerm);
+            alert(`Mobile search results for: ${searchTerm}`);
+        }
+    }
+
+    // Close mobile search bar when clicking outside
+    document.addEventListener('click', function(e) {
+        if (mobileSearchBar && mobileSearchBar.classList.contains('active')) {
+            // Check if click is outside the mobile search bar and search icon
+            if (!mobileSearchBar.contains(e.target) && !mobileSearchIcon.contains(e.target)) {
+                mobileSearchBar.classList.remove('active');
+                if (mobileSearchInput) {
+                    mobileSearchInput.value = '';
+                    mobileSearchContainer.classList.remove('has-content');
+                }
+            }
+        }
     });
     
     searchInput.addEventListener('keypress', function(e) {
@@ -88,6 +158,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const userName = document.querySelector('.user-name');
     const resolutionSwitch = document.getElementById('resolution-switch');
     const switchText = document.querySelector('.switch-text');
+    const mobileSwitch = document.getElementById('mobile-switch');
+    const mobileSwitchText = document.querySelector('.mobile-switch-text');
+    const body = document.body;
     
     // Fonction de mise à jour du composant
     updateBtn.addEventListener('click', function() {
@@ -120,11 +193,34 @@ document.addEventListener('DOMContentLoaded', function() {
         if (this.checked) {
             // Activer la résolution 993px
             body.classList.add('resolution-993');
+            body.classList.remove('mobile-mode');
             switchText.textContent = 'ON';
+            // Désactiver le mode mobile
+            mobileSwitch.checked = false;
+            mobileSwitchText.textContent = 'OFF';
         } else {
             // Désactiver la résolution (retour normal)
             body.classList.remove('resolution-993');
             switchText.textContent = 'OFF';
+        }
+    });
+    
+    // Gestion du switch mobile
+    mobileSwitch.addEventListener('change', function() {
+        const body = document.body;
+        
+        if (this.checked) {
+            // Activer le mode mobile 375px
+            body.classList.add('mobile-mode');
+            body.classList.remove('resolution-993');
+            mobileSwitchText.textContent = 'ON';
+            // Désactiver la résolution 993px
+            resolutionSwitch.checked = false;
+            switchText.textContent = 'OFF';
+        } else {
+            // Désactiver le mode mobile (retour normal)
+            body.classList.remove('mobile-mode');
+            mobileSwitchText.textContent = 'OFF';
         }
     });
     

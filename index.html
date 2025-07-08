@@ -12,6 +12,7 @@
 <body>
     <div class="header">
         <div class="header-container">
+            <div class="logo"></div>
             <div class="contact-section">
                 <div class="mail-icon">
                     <img src="images/Mail.svg" alt="Mail">
@@ -19,7 +20,8 @@
                 <div class="contact-text">Contact</div>
             </div>
             
-            <div class="right-section">
+            <!-- Desktop right section -->
+            <div class="desktop-section">
                 <div class="search-container">
                     <div class="loading-icon">
                         <img src="images/Loading.svg" alt="Loading">
@@ -40,6 +42,29 @@
                             <img src="images/Dropdown.svg" alt="Dropdown">
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- Mobile right section -->
+            <div class="mobile-section">
+                <div class="mobile-search-icon">
+                    <img src="images/Search.svg" alt="Search">
+                </div>
+                <div class="mobile-burger-icon">
+                    <img src="images/Burger Menu.svg" alt="Menu">
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile search bar -->
+        <div class="mobile-search-bar">
+            <div class="mobile-search-container">
+                <input type="text" class="mobile-search-input" placeholder="Search an article, an e-learning, a product...">
+                <div class="mobile-search-submit">
+                    <img src="images/Search.svg" alt="Search">
+                </div>
+                <div class="mobile-search-close">
+                    <img src="images/Close.svg" alt="Close">
                 </div>
             </div>
         </div>
@@ -67,6 +92,17 @@
                     <span class="switch-button"></span>
                 </label>
                 <span class="switch-text">OFF</span>
+            </div>
+        </div>
+        
+        <div class="setting-group">
+            <label for="mobile-switch">Mobile mode (375px):</label>
+            <div class="switch-container">
+                <input type="checkbox" id="mobile-switch" class="switch-input">
+                <label for="mobile-switch" class="switch-label">
+                    <span class="switch-button"></span>
+                </label>
+                <span class="mobile-switch-text">OFF</span>
             </div>
         </div>
         
