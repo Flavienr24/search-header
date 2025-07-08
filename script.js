@@ -316,7 +316,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // Add hover effects for better UX
-        const interactiveElements = [contactSection, dropdownSection];
+        const interactiveElements = [dropdownSection];
         
         interactiveElements.forEach(element => {
             element.addEventListener('mouseenter', function() {
